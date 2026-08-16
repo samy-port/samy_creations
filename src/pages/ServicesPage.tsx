@@ -12,7 +12,6 @@ import {
   BarChart3,
   MapPin,
   ArrowLeft,
-  ArrowUpRight,
   CheckCircle2,
   Filter,
   MessageSquare,

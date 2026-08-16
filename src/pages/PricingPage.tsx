@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import {
   CheckCircle2,
-  Phone,
   ArrowLeft,
   Sparkles,
   Zap,
-  X,
   MessageSquare,
 } from 'lucide-react';
-import { pricingPackages, PricingPackage } from '../data/pricingData';
+import { pricingPackages } from '../data/pricingData';
 import { Logo } from '../components/Logo';
 
 interface PricingPageProps {
@@ -23,19 +21,11 @@ export const StandalonePricingPage: React.FC<PricingPageProps> = ({
   currentLogoMask,
   onNavigateHome,
 }) => {
-  const [selectedPackage, setSelectedPackage] = useState<PricingPackage | null>(null);
-  const [showConnectModal, setShowConnectModal] = useState(false);
-
   const getWhatsAppLink = (packageName?: string) => {
     const text = packageName
       ? `Hi Samy_Creations, I am interested in your ${packageName} package.`
       : `Hi Samy_Creations, I'd like to connect with you.`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  };
-
-  const handleConnectClick = (pkg?: PricingPackage) => {
-    if (pkg) setSelectedPackage(pkg);
-    setShowConnectModal(true);
   };
 
   return (
@@ -192,62 +182,6 @@ export const StandalonePricingPage: React.FC<PricingPageProps> = ({
           </div>
         </div>
       </main>
-
-      {/* Connect Modal */}
-      <AnimatePresence>
-        {showConnectModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="liquid-glass rounded-3xl p-8 md:p-10 max-w-lg w-full bg-black/90 border border-white/15 shadow-2xl relative text-center"
-            >
-              <button
-                onClick={() => setShowConnectModal(false)}
-                className="absolute top-6 right-6 text-white/50 hover:text-white cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="w-12 h-12 rounded-full bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4 text-emerald-400">
-                <MessageSquare className="w-6 h-6" />
-              </div>
-
-              <h3 className="text-2xl font-semibold text-white mb-2">Connect With SAMY_CREATIONS</h3>
-              <p className="text-white/60 text-xs md:text-sm mb-6">
-                {selectedPackage
-                  ? `Inquiring about ${selectedPackage.name} (${selectedPackage.price}${selectedPackage.period})`
-                  : 'Get a custom quote and strategy roadmap for your business.'}
-              </p>
-
-              <div className="liquid-glass rounded-2xl p-6 mb-6 border border-white/10 flex items-center justify-center gap-3">
-                <MessageSquare className="w-5 h-5 text-emerald-400" />
-                <a
-                  href={getWhatsAppLink(selectedPackage?.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white font-mono text-xl font-bold hover:text-emerald-400 transition-colors"
-                >
-                  +91 79818 45968
-                </a>
-              </div>
-
-              <div className="flex gap-4">
-                <a
-                  href={getWhatsAppLink(selectedPackage?.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-3 rounded-full uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Connect on WhatsApp</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       <footer className="py-12 px-6 border-t border-white/10 bg-black text-white/50 text-xs">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
