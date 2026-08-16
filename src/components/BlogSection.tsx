@@ -21,15 +21,14 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
   const categories = ['All', 'AI & Performance', 'UX & Neuromarketing', 'SEO & Organic Growth', 'Analytics & Attribution'];
 
   const colorPresets = [
-    { label: 'Royal Blue', class: 'bg-blue-600', colorCode: '#2563eb' },
-    { label: 'Neon Cyan', class: 'bg-cyan-400', colorCode: '#00f7ff' },
-    { label: 'Electric Violet', class: 'bg-purple-600', colorCode: '#8b5cf6' },
-    { label: 'Pure White', class: 'bg-white', colorCode: '#ffffff' },
-    { label: 'Sunset Amber', class: 'bg-amber-400', colorCode: '#fbbf24' },
+    { label: 'Royal Blue', class: 'bg-blue-600' },
+    { label: 'Neon Cyan', class: 'bg-cyan-400' },
+    { label: 'Electric Violet', class: 'bg-purple-600' },
+    { label: 'Pure White', class: 'bg-white' },
+    { label: 'Sunset Amber', class: 'bg-amber-400' },
     {
       label: 'Holographic Gradient',
       class: 'bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500',
-      colorCode: 'gradient',
     },
   ];
 
@@ -48,7 +47,20 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(37,99,235,0.05)_0%,_transparent_70%)] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Interactive Logo Mask Customizer Widget */}
+        {/* Section Title */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-blue-400 text-xs font-mono uppercase tracking-widest block mb-2">
+            Thought Leadership
+          </span>
+          <h2 className="text-4xl md:text-6xl text-white tracking-tight font-serif mb-6">
+            Latest Marketing <em className="italic">Insights</em>
+          </h2>
+          <p className="text-white/60 text-base md:text-lg leading-relaxed font-normal">
+            Deep dives into AI-powered marketing strategy, SEO growth models, UI conversion architecture, and campaign analytics.
+          </p>
+        </div>
+
+        {/* Dynamic Logo Mask Customizer Widget */}
         <div className="liquid-glass rounded-3xl p-6 md:p-8 mb-16 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
@@ -59,12 +71,11 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                 Dynamic Logo Mask Customizer
               </h3>
               <p className="text-white/50 text-xs md:text-sm">
-                Select a mask color or gradient below to dynamically recolor the SAMY_CREATIONS logo:
+                Recolor the SAMY_CREATIONS logo mark dynamically across all sections:
               </p>
             </div>
           </div>
 
-          {/* Color Switcher Pills */}
           <div className="flex flex-wrap items-center gap-2 justify-center md:justify-end">
             {colorPresets.map((preset) => (
               <button
@@ -76,64 +87,50 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                     : 'liquid-glass text-white/80 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <span
-                  className={`w-3.5 h-3.5 rounded-full ${preset.class} border border-white/30`}
-                />
+                <span className={`w-3.5 h-3.5 rounded-full ${preset.class} border border-white/30`} />
                 <span>{preset.label}</span>
               </button>
             ))}
           </div>
 
-          {/* Live Logo Preview Box */}
           <div className="liquid-glass rounded-2xl px-5 py-3 flex items-center gap-3 border border-white/10 shrink-0">
             <span className="text-white/40 text-xs font-mono uppercase">Preview:</span>
-            <Logo maskColor={currentLogoMask} className="h-7" />
+            <Logo maskColor={currentLogoMask} className="h-7" showText={false} />
           </div>
         </div>
 
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-3 block">
-              Digital Marketing Hub & Case Studies
-            </span>
-            <h2 className="text-4xl md:text-6xl text-white tracking-tight font-normal">
-              Insights & Strategic Thinking
-            </h2>
+        {/* Filter & Search Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 border-b border-white/10 pb-8">
+          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto scrollbar-none pb-2 md:pb-0">
+            <Filter className="w-4 h-4 text-white/40 shrink-0 mr-1" />
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+                  selectedCategory === cat
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'liquid-glass text-white/60 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
 
-          {/* Search Bar */}
           <div className="liquid-glass rounded-full px-5 py-2.5 flex items-center gap-3 max-w-sm w-full border border-white/10">
             <Search className="w-4 h-4 text-white/40" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search marketing blogs..."
+              placeholder="Search articles..."
               className="bg-transparent text-white placeholder:text-white/40 text-sm focus:outline-none w-full"
             />
           </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
-          <Filter className="w-4 h-4 text-white/40 shrink-0 mr-1" />
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'liquid-glass text-white/60 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Blog Grid */}
+        {/* Blog Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredBlogs.map((post, idx) => (
             <motion.article
@@ -141,11 +138,10 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
               onClick={() => setSelectedPost(post)}
-              className="liquid-glass rounded-3xl overflow-hidden group border border-white/10 hover:border-blue-500/40 transition-all duration-500 flex flex-col cursor-pointer"
+              className="liquid-glass rounded-3xl overflow-hidden group border border-white/10 hover:border-blue-500/40 transition-all duration-500 flex flex-col cursor-pointer bg-black/60"
             >
-              {/* Image Box */}
               <div className="aspect-[16/10] overflow-hidden relative">
                 <img
                   src={post.coverImage}
@@ -158,7 +154,6 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                 </span>
               </div>
 
-              {/* Content */}
               <div className="p-6 md:p-7 flex flex-col justify-between flex-1">
                 <div>
                   <div className="flex items-center justify-between text-xs text-white/50 mb-3">
@@ -178,7 +173,6 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                   </p>
                 </div>
 
-                {/* Footer */}
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <img
@@ -197,24 +191,8 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
             </motion.article>
           ))}
         </div>
-
-        {filteredBlogs.length === 0 && (
-          <div className="text-center py-16 liquid-glass rounded-3xl p-8 border border-white/10">
-            <p className="text-white/50 text-base mb-2">No digital marketing blogs match your filter.</p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedCategory('All');
-              }}
-              className="text-blue-400 text-sm font-medium underline cursor-pointer"
-            >
-              Reset Search Filters
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Blog Article Reader Modal */}
       <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />
     </section>
   );
