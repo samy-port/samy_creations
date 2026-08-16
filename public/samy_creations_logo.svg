@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" fill="none">
+  <!-- SC Ribbon Icon Mark -->
+  <g transform="translate(50, 20)">
+    <path fill="#2563eb" fill-rule="evenodd" clip-rule="evenodd" d="M125,35 C85,35 50,65 50,110 L50,160 C50,215 95,255 145,255 C185,255 220,225 240,190 L170,110 C155,93 135,93 120,110 C108,125 108,145 120,160 L160,210 C130,240 85,230 70,200 C58,180 58,150 58,135 L58,110 C58,80 80,55 115,55 C138,55 162,72 182,98 L250,180 C280,220 330,238 370,200 C400,170 400,120 370,85 C330,40 270,50 240,90 L262,112 C282,80 328,75 352,100 C372,120 372,150 352,170 C322,200 282,185 258,150 L188,70 C162,45 142,35 125,35 Z" />
+  </g>
+  <!-- Text SAMY_CREATIONS -->
+  <text x="250" y="320" font-family="'Orbitron', 'Space Grotesk', 'Courier New', monospace" font-size="34" font-weight="900" fill="#2563eb" letter-spacing="4" text-anchor="middle">
+    SAMY_CREATIONS
+  </text>
+</svg>
